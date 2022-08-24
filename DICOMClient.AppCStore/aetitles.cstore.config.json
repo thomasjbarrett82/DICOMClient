@@ -1,0 +1,18 @@
+[
+  {
+    "Name": "CStore Demo 1",
+    "HostTitle": "CStoreDemo1",
+    "HostAddress": "localhost",
+    "HostPort": 12347,
+    "UseTls": false,
+    "CallingTitle": "DICOMCLIENT"
+  },
+  {
+    "Name": "CStore Demo 2",
+    "HostTitle": "CStoreDemo2",
+    "HostAddress": "localhost",
+    "HostPort": 12348,
+    "UseTls": false,
+    "CallingTitle": "DICOMCLIENT"
+  }
+]

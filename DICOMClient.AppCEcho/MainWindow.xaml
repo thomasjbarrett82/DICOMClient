@@ -1,0 +1,67 @@
+﻿<Window x:Class="DICOMClient.WPF.CEcho.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:WPF="clr-namespace:Serilog.Sinks.WPF;assembly=Serilog.Sinks.WPF"
+        xmlns:local="clr-namespace:DICOMClient.WPF.CEcho"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1200"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.DataContext>
+        <local:CEchoViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="120px" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <materialDesign:Card Padding="16" Margin="4" Grid.Row="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MaxWidth="150" />
+                </Grid.ColumnDefinitions>
+                <GroupBox
+                    Grid.Column="0"
+                    Style="{DynamicResource MaterialDesignCardGroupBox}">
+                    <GroupBox.Header>Target</GroupBox.Header>
+                    <ComboBox
+                        Style="{StaticResource MaterialDesignComboBox}"
+                        HorizontalAlignment="Left"
+                        HorizontalContentAlignment="Stretch"
+                        IsEditable="false"
+                        ItemsSource="{Binding TargetNameList}"
+                        SelectedValue="{Binding TargetName}"></ComboBox>
+                </GroupBox>
+                <Button 
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    FontSize="20"
+                    Content="Submit"
+                    Command="{Binding Path=SubmitCommand}" />
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card Padding="16" Margin="4" Grid.Row="1">
+            <WPF:SimpleLogTextBox 
+                Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}"
+                FontFamily="Lucida Console"
+                FontSize="12"
+                IsReadyOnly="True"
+                ScrollBarVisibility="Auto"/>
+        </materialDesign:Card>
+    </Grid>
+</Window>

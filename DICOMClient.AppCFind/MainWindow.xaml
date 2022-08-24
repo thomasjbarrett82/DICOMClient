@@ -1,0 +1,235 @@
+﻿<Window x:Class="DICOMClient.WPF.CFind.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:WPF="clr-namespace:Serilog.Sinks.WPF;assembly=Serilog.Sinks.WPF"
+        xmlns:local="clr-namespace:DICOMClient.WPF.CFind"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1200"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.DataContext>
+        <local:CFindViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DialogHost.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <materialDesign:DialogHost
+        DialogClosing="DialogHost_OnDialogClosing">
+        <!-- window contents -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="360"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <materialDesign:Card Padding="16" Margin="4" Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition MaxHeight="280"/>
+                        <RowDefinition MaxHeight="80" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition MaxWidth="150px"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Style="{DynamicResource MaterialDesignCardGroupBox}">
+                        <GroupBox.Header>Parameters</GroupBox.Header>
+                        <ScrollViewer
+                                Style="{DynamicResource MaterialDesignScrollViewer}"
+                                HorizontalScrollBarVisibility="Auto"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True">
+                            <StackPanel>
+                                <ListView
+                                    x:Name="ParametersList"
+                                    ItemsSource="{Binding ParametersOC}"
+                                    IsSynchronizedWithCurrentItem="True"
+                                    HorizontalAlignment="Left">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Name">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox 
+                                                            Text="{Binding TagName}" 
+                                                            Style="{DynamicResource MaterialDesignTextBox}"
+                                                            IsReadOnly="True"
+                                                            Height="25"
+                                                            MinWidth="150"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Value">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox 
+                                                            Text="{Binding TagValue}" 
+                                                            Style="{DynamicResource MaterialDesignTextBox}"
+                                                            MinWidth="300"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button 
+                                                            Style="{DynamicResource MaterialDesignFloatingActionLightButton}"
+                                                            ToolTip="Delete parameter"
+                                                            IsEnabled="True"
+                                                            Height="Auto"
+                                                            Width="Auto"
+                                                            Content="{materialDesign:PackIcon Kind=Trash, Size=20}"
+                                                            Click="DeleteParameter_OnClick"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Button
+                                    Style="{DynamicResource MaterialDesignRaisedLightButton}"
+                                    materialDesign:ButtonAssist.CornerRadius="10"
+                                    Margin="5"
+                                    HorizontalAlignment="Left"
+                                    FontSize="12"
+                                    Content="Add Parameter"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </GroupBox>
+                    <GroupBox 
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Style="{DynamicResource MaterialDesignCardGroupBox}"
+                        Padding="5"
+                        Margin="3">
+                        <GroupBox.Header>Target</GroupBox.Header>
+                        <ComboBox 
+                            Style="{StaticResource MaterialDesignComboBox}"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Stretch"
+                            IsEditable="False"
+                            ItemsSource="{Binding TargetNameList}"
+                            SelectedValue="{Binding TargetName}">
+                        </ComboBox>
+                    </GroupBox>
+                    <GroupBox 
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Style="{DynamicResource MaterialDesignCardGroupBox}"
+                        Padding="5"
+                        Margin="3">
+                        <GroupBox.Header>Level</GroupBox.Header>
+                        <ComboBox 
+                            Style="{StaticResource MaterialDesignComboBox}"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Stretch"
+                            IsEditable="False"
+                            ItemsSource="{Binding Path=QueryLevelList}"
+                            SelectedValue="{Binding Path=QueryLevel}">
+                        </ComboBox>
+                    </GroupBox>
+                    <Button 
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        HorizontalAlignment="Center"
+                        FontSize="20"
+                        Content="Submit"
+                        Command="{Binding Path=SubmitCommand}"/>
+                </Grid>
+            </materialDesign:Card>
+            <materialDesign:Card Padding="16" Margin="4" Grid.Row="1">
+                <WPF:SimpleLogTextBox 
+                    Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}"
+                    FontFamily="Lucida Console"
+                    FontSize="12"
+                    IsReadyOnly="True"
+                    ScrollBarVisibility="Auto"/>
+            </materialDesign:Card>
+        </Grid> 
+        
+        <!-- dialog contents -->
+        <!-- TODO fluent validation on combobox and textbox, instead of code behind on accept -->
+        <materialDesign:DialogHost.DialogContent>
+            <Grid Margin="16">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <GroupBox
+                    Grid.Row="0"
+                    Style="{DynamicResource MaterialDesignCardGroupBox}"
+                    Margin="3">
+                    <GroupBox.Header>Dicom Tag</GroupBox.Header>
+                    <ComboBox 
+                        x:Name="AddParamDialog_TagName"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                        HorizontalAlignment="Left"
+                        HorizontalContentAlignment="Stretch"
+                        IsEditable="False"
+                        ItemsSource="{Binding Path=DicomTagNameList}"
+                        SelectedValue="{Binding Path=DicomTagName, Mode=TwoWay}">
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel/>
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                    </ComboBox>
+                </GroupBox>
+                <GroupBox
+                    Grid.Row="1"
+                    Style="{DynamicResource MaterialDesignCardGroupBox}"
+                    Margin="3">
+                    <GroupBox.Header>Value</GroupBox.Header>
+                    <TextBox 
+                        x:Name="AddParamDialog_TagValue"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Margin="0 8 0 0"
+                        Text="{Binding Path=DicomTagValue, Mode=TwoWay}"/> 
+                </GroupBox>
+                <StackPanel 
+                    Grid.Row="2"
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center"
+                    Margin="0 16 0 0">
+                    <Button IsDefault="True" Style="{StaticResource MaterialDesignFlatButton}"
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                        <Button.CommandParameter>
+                            True
+                        </Button.CommandParameter>
+                        ACCEPT
+                    </Button>
+                    <Button IsCancel="True" Margin="8 0 0 0" Style="{StaticResource MaterialDesignFlatButton}"
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                        <Button.CommandParameter>
+                            False
+                        </Button.CommandParameter>
+                        CANCEL
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </materialDesign:DialogHost.DialogContent>
+    </materialDesign:DialogHost>
+</Window>

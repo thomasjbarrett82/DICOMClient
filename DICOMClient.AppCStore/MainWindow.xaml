@@ -1,0 +1,158 @@
+﻿<Window x:Class="DICOMClient.WPF.CStore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:WPF="clr-namespace:Serilog.Sinks.WPF;assembly=Serilog.Sinks.WPF"
+        xmlns:local="clr-namespace:DICOMClient.WPF.CStore"
+        xmlns:constants="clr-namespace:DICOMClient.Common.Constant;assembly=DICOMClient.Common"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1200"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.DataContext>
+        <local:CStoreViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <local:EnumBooleanConverter x:Key="enumBoolConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="270"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <materialDesign:Card Padding="16" Margin="4" Grid.Row="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition MaxHeight="75"/>
+                    <RowDefinition MaxHeight="75"/>
+                    <RowDefinition MaxHeight="80"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MaxWidth="150px"/>
+                </Grid.ColumnDefinitions>
+                <GroupBox 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{DynamicResource MaterialDesignCardGroupBox}"
+                    Padding="5"
+                    Margin="3">
+                    <GroupBox.Header>File</GroupBox.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MaxWidth="25"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition MaxWidth="50"/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton 
+                            Grid.Column="0"
+                            GroupName="DicomInputType"
+                            x:Name="CStoreFileRadio"
+                            Style="{DynamicResource MaterialDesignAccentRadioButton}"
+                            IsChecked="{Binding Path=FileFolderRadio, Converter={StaticResource enumBoolConverter}, ConverterParameter={x:Static constants:FileFolder.File}}" >
+                        </RadioButton>
+                        <TextBox 
+                            Grid.Column="1"
+                            Style="{DynamicResource MaterialDesignComboBoxEditableTextBox}"
+                            VerticalAlignment="Center"
+                            Text="{Binding Path=FileName}">
+                        </TextBox>
+                        <Button 
+                            Grid.Column="2" 
+                            Style="{DynamicResource MaterialDesignFlatAccentButton}"
+                            VerticalAlignment="Center"
+                            Click="CStoreButtonForFile_OnClick">
+                            ...
+                        </Button>
+                    </Grid>
+                </GroupBox>
+                <GroupBox 
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Style="{DynamicResource MaterialDesignCardGroupBox}"
+                    Padding="5"
+                    Margin="3">
+                    <GroupBox.Header>Folder</GroupBox.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MaxWidth="25"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition MaxWidth="50"/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton 
+                            Grid.Column="0"
+                            GroupName="DicomInputType"
+                            x:Name="CStoreFolderRadio"
+                            Style="{DynamicResource MaterialDesignAccentRadioButton}"
+                            IsChecked="{Binding Path=FileFolderRadio, Converter={StaticResource enumBoolConverter}, ConverterParameter={x:Static constants:FileFolder.Folder}}" >
+                        </RadioButton>
+                        <TextBox 
+                            Grid.Column="1"
+                            Style="{DynamicResource MaterialDesignComboBoxEditableTextBox}"
+                            VerticalAlignment="Center"
+                            Text="{Binding Path=FolderName}">
+                        </TextBox>
+                        <Button 
+                            Grid.Column="2" 
+                            Style="{DynamicResource MaterialDesignFlatAccentButton}"
+                            VerticalAlignment="Center"
+                            Click="CStoreButtonForFolder_OnClick">
+                            ...
+                        </Button>
+                    </Grid>
+                </GroupBox>
+                <CheckBox 
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="16"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Right"
+                    FlowDirection="RightToLeft"
+                    FontSize="11"
+                    IsChecked="{Binding Path=IncludeSubfolders, Mode=TwoWay}">
+                    ?Include subfolders
+                </CheckBox>
+                <GroupBox 
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Style="{DynamicResource MaterialDesignCardGroupBox}"
+                    Padding="5"
+                    Margin="3">
+                    <GroupBox.Header>Target</GroupBox.Header>
+                    <ComboBox 
+                        Style="{StaticResource MaterialDesignComboBox}"
+                        HorizontalAlignment="Left"
+                        HorizontalContentAlignment="Stretch"
+                        IsEditable="False"
+                        ItemsSource="{Binding TargetNameList}"
+                        SelectedValue="{Binding TargetName}"></ComboBox>
+                </GroupBox>
+                <Button 
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    FontSize="20"
+                    Content="Submit"
+                    Command="{Binding Path=SubmitCommand}"/>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card Padding="16" Margin="4" Grid.Row="1">
+            <WPF:SimpleLogTextBox 
+                Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}"
+                FontFamily="Lucida Console"
+                FontSize="12"
+                IsReadyOnly="True"
+                ScrollBarVisibility="Auto"/>
+        </materialDesign:Card>
+    </Grid>
+</Window>

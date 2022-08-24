@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DICOMClient.Common", "DICOMClient.Common\DICOMClient.Common.csproj", "{05DE3F62-584C-44CE-A530-6B468FA0F038}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DICOMClient.Core", "DICOMClient.Core\DICOMClient.Core.csproj", "{3D297E14-4495-40DE-A88F-067B458D492A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DicomClient.Test", "DicomClient.Test\DicomClient.Test.csproj", "{4C1BC907-BE13-482A-9E20-295E82813A6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DICOMClient.WPF.CEcho", "DICOMClient.AppCEcho\DICOMClient.WPF.CEcho.csproj", "{41CFD8DC-7810-4D49-9061-992B20FDD087}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B3DB3D5F-F5F7-4524-B8C7-559CD52D529D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DICOMClient.WPF.CStore", "DICOMClient.AppCStore\DICOMClient.WPF.CStore.csproj", "{BDCB4D01-19FA-4FE9-A988-3B584E575B0A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DICOMClient.WPF.CFind", "DICOMClient.AppCFind\DICOMClient.WPF.CFind.csproj", "{F4F37ECD-31DC-4103-80BA-805973E571FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05DE3F62-584C-44CE-A530-6B468FA0F038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05DE3F62-584C-44CE-A530-6B468FA0F038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05DE3F62-584C-44CE-A530-6B468FA0F038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05DE3F62-584C-44CE-A530-6B468FA0F038}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D297E14-4495-40DE-A88F-067B458D492A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D297E14-4495-40DE-A88F-067B458D492A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D297E14-4495-40DE-A88F-067B458D492A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D297E14-4495-40DE-A88F-067B458D492A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C1BC907-BE13-482A-9E20-295E82813A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1BC907-BE13-482A-9E20-295E82813A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1BC907-BE13-482A-9E20-295E82813A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1BC907-BE13-482A-9E20-295E82813A6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41CFD8DC-7810-4D49-9061-992B20FDD087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41CFD8DC-7810-4D49-9061-992B20FDD087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41CFD8DC-7810-4D49-9061-992B20FDD087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41CFD8DC-7810-4D49-9061-992B20FDD087}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDCB4D01-19FA-4FE9-A988-3B584E575B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDCB4D01-19FA-4FE9-A988-3B584E575B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDCB4D01-19FA-4FE9-A988-3B584E575B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDCB4D01-19FA-4FE9-A988-3B584E575B0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4F37ECD-31DC-4103-80BA-805973E571FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4F37ECD-31DC-4103-80BA-805973E571FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4F37ECD-31DC-4103-80BA-805973E571FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4F37ECD-31DC-4103-80BA-805973E571FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96431C0D-D75E-4E9B-A8B2-121BD46736A2}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,34 @@
+[
+  {
+    "Name": "CFind Demo 1",
+    "HostTitle": "CFindDemo1",
+    "HostAddress": "localhost",
+    "HostPort": 12345,
+    "UseTls": false,
+    "CallingTitle": "DICOMCLIENT"
+  },
+  {
+    "Name": "CFind Demo 2",
+    "HostTitle": "CFindDemo2",
+    "HostAddress": "localhost",
+    "HostPort": 12346,
+    "UseTls": false,
+    "CallingTitle": "DICOMCLIENT"
+  },
+  {
+    "Name": "CStore Demo 1",
+    "HostTitle": "CStoreDemo1",
+    "HostAddress": "localhost",
+    "HostPort": 12347,
+    "UseTls": false,
+    "CallingTitle": "DICOMCLIENT"
+  },
+  {
+    "Name": "CStore Demo 2",
+    "HostTitle": "CStoreDemo2",
+    "HostAddress": "localhost",
+    "HostPort": 12348,
+    "UseTls": false,
+    "CallingTitle": "DICOMCLIENT"
+  }
+]
